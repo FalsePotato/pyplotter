@@ -138,7 +138,8 @@ class WidgetBlueFors(QtWidgets.QWidget):
                                          'cpatscale_name', 'cpatscale_value',
                                          'cpasn_name', 'cpasn_value',
                                          'cpamodel_name', 'cpamodel_value'],
-                                     header=None)
+                                     header=None, 
+                                     index_col=False)
 
                     x = pandasTimestamp2Int(pd.to_datetime(df['date']+'-'+df['time'], format='%d-%m-%y-%H:%M:%S'))
 

@@ -132,13 +132,13 @@ class WidgetCSV(QtWidgets.QWidget):
                 ## Guess comment character
                 # We check if there is no comment on the csv file by guessing
                 # if the first character of the first line is part of a float
-                # number.
+                # number and is not part of the base alphabet [a-z].
                 # If there is comment c will contain the comment character
                 # otherwise it will return None.
                 f = open(fileAbsPath, 'r')
                 c = f.readline()[0]
                 f.close()
-                if c.isnumeric() or c=='+' or c=='-':
+                if c.isnumeric() or c=='+' or c=='-' or c.isalpha():
                     comment = None
                 else:
                     comment = c
@@ -172,7 +172,7 @@ class WidgetCSV(QtWidgets.QWidget):
                     delimiter = ' '
 
                 # Get the data as panda dataframe
-                df = pd.read_csv(fileAbsPath, comment=comment, sep=delimiter, header=header)
+                df = pd.read_csv(fileAbsPath, comment=comment, sep=delimiter, header=header, index_col=False)
 
                 # Get the column name as string
                 self.independentParameter = str(df.columns[0])
